@@ -13,20 +13,20 @@ allow it to be included within a wider testing regime with myTAP.
 
 Schema object types tested are:
 
-tables
-columns
-contraints
-indexes
-triggers
-views
-routines and parameters
-events
+* tables
+* columns
+* contraints
+* indexes
+* triggers
+* views
+* routines and parameters
+* events
 
 
 ## Installation
-Install myschemahash to the tap schema:
+Select the script version to match your version of MySQL and install to the tap schema:
 
-    mysql -u ${MYOPTS} < myschemahash.sql
+    mysql -u ${MYOPTS} < myschemahash-5.5.sql
 
 
 ## Operation
@@ -52,8 +52,10 @@ or to use with TAP
 
 The MySQL information_schema is constantly evolving with columns added as new
 functionality is added to the database. In particular, additional columns were
-added to information_schema.columns in versions 5.6.4 and 5.7.6. If using MySQL
-< 5.7.6, comment out the indicated lines in the myschemahash() function.
+added to information_schema.columns in versions 5.6.4 and 5.7.6. In addition,
+there is a rather insidious bug in the 5.7 information_schema so it is not
+always possible to get an accurate value for the character_maximum_length and
+character_octet_length in this version, hence these columns are ignored in 5.7.
 
 myschemahash uses the GROUP_CONCAT() function, this has a default of 1024 characters
 which will be insuficient when working with anything other than the most trivial schema
