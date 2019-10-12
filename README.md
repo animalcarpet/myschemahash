@@ -26,8 +26,9 @@ Schema object types tested are:
 ## Installation
 Select the script version to match your version of MySQL and install to the tap schema:
 
-    mysql -u ${MYOPTS} < myschemahash-5.5.sql
-
+```
+mysql -u ${MYOPTS} < myschemahash-5.5.sql
+```
 
 ## Operation
 myschemahash will generate a SHA-1 of all the non-volatile object defintions in
@@ -42,11 +43,15 @@ entire hash to make a comparison, even a small subset of the characters will
 suffice because of the unlikely possibility of a collision. 
 
 Run as standalone function
-      % mysql --batch --raw --skip-column-names --execute "SELECT tap.myschemahash('dbbame')"
-
+```
+% mysql --batch --raw --skip-column-names --execute "SELECT tap.myschemahash('dbbame')"
+```
 or to use with TAP
-      % mysql --batch --raw --skip-column-names --execute "SELECT tap.myschemahash_get('dbbame')"
-      % mysql --batch --raw --skip-column-names --execute "SELECT tap.myschemahash_is('dbbame','2356af')"
+
+```
+% mysql --batch --raw --skip-column-names --execute "SELECT tap.myschemahash_get('dbbame')"
+% mysql --batch --raw --skip-column-names --execute "SELECT tap.myschemahash_is('dbbame','2356af')"
+```
 
 ### Notes
 
@@ -62,7 +67,9 @@ which will be insuficient when working with anything other than the most trivial
 definitions. GROUP_CONCAT will warn rather than error if the limit is breached so
 you should set the group_concat_max_len variable to something more suitable.
 
+```
 SET SESSION group_concat_max_len = 1000000;
+```
 
 See https://bugs.mysql.com/bug.php?id=78041
 
@@ -74,7 +81,7 @@ The source code is available at
 
 ### Author
 
-* [Paul Campbell](https://github.com/animalcarpet)
+[Paul Campbell](https://github.com/animalcarpet)
 
 
 
