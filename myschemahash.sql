@@ -11,6 +11,7 @@
 -- This version 5.7.6 and up
 -- remove 'datetime_precision' for MySQL < 5.6.4
 -- remove 'generation_expression' for MySQL < for 5.7.6
+-- versions other than 5.7 add back character_maximum_length and character_octet_length
 
 -- USE:
 -- just get the hash
@@ -79,8 +80,9 @@ BEGIN
       (SELECT SHA1(GROUP_CONCAT(SHA1(CONCAT_WS('',
         `table_catalog`,`table_schema`,`table_name`,`column_name`,
         `ordinal_position`,`column_default`,`is_nullable`,`data_type`,`character_set_name`,
-        `character_maximum_length`,
-        `character_octet_length`,`numeric_precision`,
+	-- c_m_l and c_o_l broken in 5.7 (https://bugs.mysql.com/bug.php?id=88385)
+        -- `character_maximum_length`, `character_octet_length`,
+	`numeric_precision`,
         `numeric_scale`,`datetime_precision`,`collation_name`,`column_type`,
         `column_key`,`extra`,`privileges`,`column_comment`,
 	`datetime_precision`,    -- >= 5.6.4
@@ -122,9 +124,9 @@ BEGIN
      -- ROUTINES
        (SELECT SHA1(GROUP_CONCAT(SHA1(CONCAT_WS('',
          `routine_catalog`,`routine_schema`,`routine_name`,
-            -- NB CML is broken in 5.7 (https://bugs.mysql.com/bug.php?id=88385)
-         `routine_type`,`data_type`, `character_maximum_length`,
-         `character_octet_length`,`numeric_precision`, `numeric_scale`,
+         `routine_type`,`data_type`,
+         -- `character_maximum_length`, `character_octet_length`,
+	 `numeric_precision`, `numeric_scale`,
          `datetime_precision`,`character_set_name`,`collation_name`,
          `dtd_identifier`,`routine_body`,`routine_definition`,
          `external_name`,`external_language`,`parameter_style`,
@@ -140,8 +142,8 @@ BEGIN
       (SELECT SHA1(GROUP_CONCAT(SHA1(CONCAT_WS('',
          `specific_catalog`,`specific_schema`,`specific_name`,
          `ordinal_position`,`parameter_mode`,`parameter_name`,`data_type`,
-         `character_maximum_length`,
-         `character_octet_length`,`numeric_precision`,
+         -- `character_maximum_length`, `character_octet_length`,
+	 `numeric_precision`,
          `numeric_scale`,`datetime_precision`,`character_set_name`,
          `collation_name`,`dtd_identifier`,
 	 `routine_type`)))) AS sha
