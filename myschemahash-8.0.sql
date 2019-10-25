@@ -101,7 +101,7 @@ BEGIN
     -- INDEXES
       (SELECT SHA1(GROUP_CONCAT(SHA1(CONCAT_WS('',
         `table_catalog`,`table_schema`,`table_name`,`index_name`,`non_unique`,
-        `index_schema`,`index_name`,`seq_in_index`,`column_name`,`collation`,`cardinality`,
+        `index_schema`,`index_name`,`seq_in_index`,`column_name`,`collation`,
         `sub_part`,`packed`,`nullable`,`index_type`,`comment`,
 	`index_comment`)))) AS sha
       FROM `information_schema`.`statistics`

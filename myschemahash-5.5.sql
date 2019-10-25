@@ -79,7 +79,7 @@ BEGIN
         `ordinal_position`,`column_default`,`is_nullable`,`data_type`,`character_set_name`,
         `character_maximum_length`, `character_octet_length`,
 	`numeric_precision`,
-        `numeric_scale`,`datetime_precision`,`collation_name`,`column_type`,
+        `numeric_scale`,`collation_name`,`column_type`,
         `column_key`,`extra`,`privileges`,`column_comment`
 	)))) AS sha
       FROM `information_schema`.`columns`
@@ -99,7 +99,7 @@ BEGIN
     -- INDEXES
       (SELECT SHA1(GROUP_CONCAT(SHA1(CONCAT_WS('',
         `table_catalog`,`table_schema`,`table_name`,`index_name`,`non_unique`,
-        `index_schema`,`index_name`,`seq_in_index`,`column_name`,`collation`,`cardinality`,
+        `index_schema`,`index_name`,`seq_in_index`,`column_name`,`collation`,
         `sub_part`,`packed`,`nullable`,`index_type`,`comment`,
 	`index_comment`)))) AS sha
       FROM `information_schema`.`statistics`
@@ -121,7 +121,7 @@ BEGIN
          `routine_type`,`data_type`,
          `character_maximum_length`, `character_octet_length`,
 	 `numeric_precision`, `numeric_scale`,
-         `datetime_precision`,`character_set_name`,`collation_name`,
+         `character_set_name`,`collation_name`,
          `dtd_identifier`,`routine_body`,`routine_definition`,
          `external_name`,`external_language`,`parameter_style`,
          `sql_data_access`,`sql_path`,`security_type`,`parameter_style`,
@@ -138,7 +138,7 @@ BEGIN
          `ordinal_position`,`parameter_mode`,`parameter_name`,`data_type`,
          `character_maximum_length`, `character_octet_length`,
 	 `numeric_precision`,
-         `numeric_scale`,`datetime_precision`,`character_set_name`,
+         `numeric_scale`,`character_set_name`,
          `collation_name`,`dtd_identifier`,
 	 `routine_type`)))) AS sha
       FROM `information_schema`.`parameters`

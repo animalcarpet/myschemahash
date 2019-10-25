@@ -56,22 +56,26 @@ or to use with TAP
 ### Notes
 
 The MySQL information_schema is constantly evolving with columns added as new
-functionality is added to the database. In particular, additional columns were
-added to information_schema.columns in versions 5.6.4 and 5.7.6. In addition,
+functionality is added to the database, hence the need for different versions
+of the myschemahash function. In particular, additional columns were added to
+information_schema.columns table in versions 5.6.4 and 5.7.6. In addition,
 there is a rather insidious bug in the 5.7 information_schema so it is not
 always possible to get an accurate value for the character_maximum_length and
-character_octet_length in this version, hence these columns are ignored in 5.7.
+character_octet_length in this version, these columns are ignored in the 5.7
+version of the function.
 
 myschemahash uses the GROUP_CONCAT() function, this has a default of 1024 characters
 which will be insuficient when working with anything other than the most trivial schema
-definitions. GROUP_CONCAT will warn rather than error if the limit is breached so
+definition. GROUP_CONCAT will warn rather than error if the limit is breached so
 you should set the group_concat_max_len variable to something more suitable.
 
 ```
 SET SESSION group_concat_max_len = 1000000;
 ```
 
-See https://bugs.mysql.com/bug.php?id=78041
+See
+https://bugs.mysql.com/bug.php?id=78041
+https://bugs.mysql.com/bug.php?id=88385
 
 ### Public Repository
 
